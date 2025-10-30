@@ -25,6 +25,7 @@ public class TodoViewModel extends AndroidViewModel {
     private MutableLiveData<String> currentFilter = new MutableLiveData<>("All");
     private MutableLiveData<Integer> activeCount = new MutableLiveData<>(0);
     private MutableLiveData<Integer> completedCount = new MutableLiveData<>(0);
+    private MutableLiveData<Integer> totalCount = new MutableLiveData<>(0);
 
     private SharedPreferences prefs;
     private Gson gson = new Gson();
@@ -45,6 +46,10 @@ public class TodoViewModel extends AndroidViewModel {
 
     public LiveData<Integer> getCompletedCount() {
         return completedCount;
+    }
+
+    public LiveData<Integer> getTotalCount() {
+        return totalCount;
     }
 
     public LiveData<String> getCurrentFilter() {
@@ -136,16 +141,23 @@ public class TodoViewModel extends AndroidViewModel {
         ArrayList<Todo> all = allTodos.getValue();
         if (all == null) return;
 
-        ArrayList<Todo> result = new ArrayList<>();
+        int total = all.size(); // Calculate total count
         int active = 0;
-        int completed = 0; // Add this counter
+        int completed = 0;
         for (Todo todo : all) {
             if (!todo.isCompleted()) {
                 active++;
             } else {
-                completed++; // Increment completed counter
+                completed++;
             }
+        }
+        activeCount.setValue(active);
+        completedCount.setValue(completed);
+        totalCount.setValue(total); // Post the new total count
 
+        // ... rest of the filtering logic remains the same
+        ArrayList<Todo> result = new ArrayList<>();
+        for (Todo todo : all) {
             if ("All".equals(filter)) {
                 result.add(todo);
             } else if ("Active".equals(filter) && !todo.isCompleted()) {
@@ -154,8 +166,6 @@ public class TodoViewModel extends AndroidViewModel {
                 result.add(todo);
             }
         }
-        activeCount.setValue(active);
-        completedCount.setValue(completed); // Post the new completed count
         filteredTodos.setValue(result);
     }
 }
