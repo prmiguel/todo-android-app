@@ -24,6 +24,7 @@ public class TodoViewModel extends AndroidViewModel {
     private MutableLiveData<ArrayList<Todo>> filteredTodos = new MutableLiveData<>();
     private MutableLiveData<String> currentFilter = new MutableLiveData<>("All");
     private MutableLiveData<Integer> activeCount = new MutableLiveData<>(0);
+    private MutableLiveData<Integer> completedCount = new MutableLiveData<>(0);
 
     private SharedPreferences prefs;
     private Gson gson = new Gson();
@@ -40,6 +41,10 @@ public class TodoViewModel extends AndroidViewModel {
 
     public LiveData<Integer> getActiveCount() {
         return activeCount;
+    }
+
+    public LiveData<Integer> getCompletedCount() {
+        return completedCount;
     }
 
     public LiveData<String> getCurrentFilter() {
@@ -133,8 +138,14 @@ public class TodoViewModel extends AndroidViewModel {
 
         ArrayList<Todo> result = new ArrayList<>();
         int active = 0;
+        int completed = 0; // Add this counter
         for (Todo todo : all) {
-            if (!todo.isCompleted()) active++;
+            if (!todo.isCompleted()) {
+                active++;
+            } else {
+                completed++; // Increment completed counter
+            }
+
             if ("All".equals(filter)) {
                 result.add(todo);
             } else if ("Active".equals(filter) && !todo.isCompleted()) {
@@ -144,6 +155,7 @@ public class TodoViewModel extends AndroidViewModel {
             }
         }
         activeCount.setValue(active);
+        completedCount.setValue(completed); // Post the new completed count
         filteredTodos.setValue(result);
     }
 }

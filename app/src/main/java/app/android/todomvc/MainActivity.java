@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText etNewTodo;
     private LinearLayout footer;
     private TextView tvItemCount, tvFilterAll, tvFilterActive, tvFilterCompleted;
-    private MaterialButton btnClearCompleted;
+    private FloatingActionButton fabClearCompleted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         tvFilterAll = findViewById(R.id.tvFilterAll);
         tvFilterActive = findViewById(R.id.tvFilterActive);
         tvFilterCompleted = findViewById(R.id.tvFilterCompleted);
-        btnClearCompleted = findViewById(R.id.btnClearCompleted);
+        fabClearCompleted = findViewById(R.id.fabClearCompleted);
 
         // Setup RecyclerView
         adapter = new TodoAdapter();
@@ -69,12 +70,19 @@ public class MainActivity extends AppCompatActivity {
             updateFilterStyles(filter);
         });
 
+        viewModel.getCompletedCount().observe(this, count -> {
+            if (count > 0) {
+                fabClearCompleted.show();
+            } else {
+                fabClearCompleted.hide();
+            }
+        });
+
         // Set Listeners
         setupListeners();
     }
 
     private void setupListeners() {
-        // Add new todo - CORRECTED LISTENER
         etNewTodo.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 String todoText = etNewTodo.getText().toString();
@@ -109,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         tvFilterAll.setOnClickListener(v -> viewModel.setFilter("All"));
         tvFilterActive.setOnClickListener(v -> viewModel.setFilter("Active"));
         tvFilterCompleted.setOnClickListener(v -> viewModel.setFilter("Completed"));
-        btnClearCompleted.setOnClickListener(v -> viewModel.clearCompleted());
+        fabClearCompleted.setOnClickListener(v -> viewModel.clearCompleted());
     }
 
     private void showEditDialog(String id, String currentTitle) {
