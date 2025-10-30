@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TodoMVC</string>
+    <plurals name="item_count">
+        <item quantity="one">%d item left</item>
+        <item quantity="other">%d items left</item>
+    </plurals>
+</resources>
