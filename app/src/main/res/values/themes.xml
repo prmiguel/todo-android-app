@@ -4,7 +4,8 @@
         <!-- Customize your light theme here. -->
          <item name="colorPrimary">#b83f45</item>
         <item name="colorOnPrimary">#FFFFFF</item>
-        <item name="colorAccent">#6200EE</item>
+        <item name="colorAccent">#b83f45</item>
+        <item name="colorControlActivated">#b83f45</item>
     </style>
 
     <style name="Theme.Todomvc" parent="Base.Theme.Todomvc" />
