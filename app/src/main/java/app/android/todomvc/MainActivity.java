@@ -62,7 +62,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Observe LiveData
         viewModel.getFilteredTodos().observe(this, todos -> {
-            adapter.setTodos(todos);
+            // Post the adapter update to the RecyclerView's message queue
+            // to prevent "cannot call this method while computing a layout" errors.
+            rvTodos.post(() -> adapter.setTodos(todos));
+
+            // Footer visibility logic can remain outside the post as it doesn't affect the RecyclerView directly.
             if (viewModel.getActiveCount().getValue() > 0 || todos.size() > 0) {
                 footer.setVisibility(View.VISIBLE);
             } else {
@@ -191,31 +195,43 @@ public class MainActivity extends AppCompatActivity {
         fabFilter.animate().rotation(0f).setDuration(200).start();
 
         // Animate mini FABs and labels to disappear
-        fabFilterAll.animate().translationY(0).alpha(0f).setDuration(200).setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                fabFilterAll.setVisibility(View.INVISIBLE);
-                tvLabelAll.setVisibility(View.INVISIBLE);
-            }
-        }).start();
+        fabFilterAll.animate().translationY(0).alpha(0f).setDuration(200)
+//                .setListener(new AnimatorListenerAdapter() {
+//            @Override
+//            public void onAnimationEnd(Animator animation) {
+//                fabFilterAll.setVisibility(View.INVISIBLE);
+//                tvLabelAll.setVisibility(View.INVISIBLE);
+//            }
+//        })
+                .start();
+        fabFilterAll.setVisibility(View.INVISIBLE);
+        tvLabelAll.setVisibility(View.INVISIBLE);
         tvLabelAll.animate().translationY(0).alpha(0f).setDuration(200).start();
 
-        fabFilterActive.animate().translationY(0).alpha(0f).setDuration(200).setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                fabFilterActive.setVisibility(View.INVISIBLE);
-                tvLabelActive.setVisibility(View.INVISIBLE);
-            }
-        }).start();
+        fabFilterActive.animate().translationY(0).alpha(0f).setDuration(200)
+//                .setListener(new AnimatorListenerAdapter() {
+//            @Override
+//            public void onAnimationEnd(Animator animation) {
+//                fabFilterActive.setVisibility(View.INVISIBLE);
+//                tvLabelActive.setVisibility(View.INVISIBLE);
+//            }
+//        })
+                .start();
+        fabFilterActive.setVisibility(View.INVISIBLE);
+        tvLabelActive.setVisibility(View.INVISIBLE);
         tvLabelActive.animate().translationY(0).alpha(0f).setDuration(200).start();
 
-        fabFilterCompleted.animate().translationY(0).alpha(0f).setDuration(200).setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                fabFilterCompleted.setVisibility(View.INVISIBLE);
-                tvLabelCompleted.setVisibility(View.INVISIBLE);
-            }
-        }).start();
+        fabFilterCompleted.animate().translationY(0).alpha(0f).setDuration(200)
+//                .setListener(new AnimatorListenerAdapter() {
+//            @Override
+//            public void onAnimationEnd(Animator animation) {
+//                fabFilterCompleted.setVisibility(View.INVISIBLE);
+//                tvLabelCompleted.setVisibility(View.INVISIBLE);
+//            }
+//        })
+                .start();
+        fabFilterCompleted.setVisibility(View.INVISIBLE);
+        tvLabelCompleted.setVisibility(View.INVISIBLE);
         tvLabelCompleted.animate().translationY(0).alpha(0f).setDuration(200).start();
     }
 

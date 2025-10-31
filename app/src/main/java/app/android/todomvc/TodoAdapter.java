@@ -29,7 +29,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
     @SuppressLint("NotifyDataSetChanged")
     public void setTodos(ArrayList<Todo> todos) {
         this.todos = todos;
-        notifyDataSetChanged();
+        this.notifyDataSetChanged();
     }
 
     @NonNull
