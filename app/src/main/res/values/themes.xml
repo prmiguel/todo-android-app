@@ -2,7 +2,9 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Todomvc" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+         <item name="colorPrimary">#b83f45</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorAccent">#6200EE</item>
     </style>
 
     <style name="Theme.Todomvc" parent="Base.Theme.Todomvc" />
