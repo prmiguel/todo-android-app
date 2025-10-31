@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="todos"
-        android:textColor="#b3b3b3"
+        android:textColor="#b83f45"
         android:textSize="100sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -73,30 +73,20 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="8dp"
-            tools:text="1 item left" />
+            tools:text="1 item left"
+            android:elevation="1dp"/>
 
     </LinearLayout>
-
-    <!-- Clear Completed FAB - MOVED TO BOTTOM LEFT -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabClearCompleted"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="Clear Completed Todos"
-        android:src="@drawable/ic_delete"
-        android:layout_marginBottom="64dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:visibility="gone"/>
 
     <!-- NEW: Expandable FAB Menu Container -->
     <!-- We use a ConstraintLayout to position the FABs relative to each other -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="2dp">
 
         <TextView
             android:id="@+id/tvLabelCompleted"
@@ -119,6 +109,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
+            android:layout_margin="16dp"
             app:backgroundTint="@android:color/white"
             app:fabSize="mini"
             app:layout_constraintBottom_toTopOf="@id/fabFilterActive"
@@ -147,6 +138,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:layout_margin="16dp"
             android:elevation="8dp"
             app:backgroundTint="@android:color/white"
             app:fabSize="mini"
@@ -175,6 +167,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:layout_margin="16dp"
             android:elevation="8dp"
             app:backgroundTint="@android:color/white"
             app:fabSize="mini"
@@ -182,6 +175,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:src="@drawable/ic_filter_all"
             android:visibility="invisible"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabClearCompleted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="Clear Completed Todos"
+            android:elevation="8dp"
+            android:src="@drawable/ic_delete"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/fabFilter" />
 
         <!-- Main Filter FAB -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton

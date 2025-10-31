@@ -43,6 +43,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
     public void onBindViewHolder(@NonNull TodoViewHolder holder, int position) {
         Todo todo = todos.get(position);
         holder.tvTitle.setText(todo.getTitle());
+        holder.cbCompleted.setOnCheckedChangeListener(null);
         holder.cbCompleted.setChecked(todo.isCompleted());
 
         // Apply strikethrough for completed items
