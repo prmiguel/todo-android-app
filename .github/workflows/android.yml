@@ -36,6 +36,12 @@ jobs:
         path: apks
     - name: Move APK
       run: mv app/build/outputs/apk/debug/todo-debug.apk apks/
+    - name: Update Apk HTML
+      run: |
+        cd apks
+        rm -f index.html
+        chmod +x generate_apk_index.sh
+        ./generate_apk_index.sh
     - name: Commit and Push Changes
       run: |
         cd apks
