@@ -19,7 +19,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            archivesBaseName = "TodoMVC"
+            archivesBaseName = "todo"
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
