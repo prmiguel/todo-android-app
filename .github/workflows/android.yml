@@ -38,13 +38,13 @@ jobs:
       run: mv app/build/outputs/apk/debug/todo-debug.apk apks/
     - name: Update Apk HTML
       run: |
-        cd apks
+        cd $GITHUB_WORKSPACE/apks
+        ls -la
         rm -f index.html
-        chmod +x generate_apk_index.sh
-        ./generate_apk_index.sh
+        source generate_apk_index.sh
     - name: Commit and Push Changes
       run: |
-        cd apks
+        cd $GITHUB_WORKSPACE/apks
         git config user.name "prmiguel"
         git config user.email "miangel-pr@outlook.com"
         git add .
