@@ -29,3 +29,20 @@ jobs:
       with:
         name: app-debug-apk
         path: app/build/outputs/apk/debug/TodoMVC-debug.apk
+    - uses: actions/checkout@v4
+      with:
+        repository: prmiguel/todo-android-app
+        ref: apks
+        path: apks
+    - name: Move APK
+      run: mv app/build/outputs/apk/debug/TodoMVC-debug.apk apks/
+    - name: Configure Git
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+    - name: Commit and Push Changes
+      run: |
+        cd apks
+        git add .
+        git commit -m "Automated commit from workflow"
+        git push origin apks
