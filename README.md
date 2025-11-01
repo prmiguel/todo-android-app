@@ -1,4 +1,4 @@
-# Native Android TodoMVC
+# Native Android Todo App
 
 This project is a faithful native Android implementation of the classic [TodoMVC](https://todomvc.com/) application. It showcases modern Android development practices by replicating the full functionality and UI/UX of the original web example using only native UI components.
 
