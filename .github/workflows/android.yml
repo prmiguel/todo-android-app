@@ -28,14 +28,14 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: app-debug-apk
-        path: app/build/outputs/apk/debug/TodoMVC-debug.apk
+        path: app/build/outputs/apk/debug/todo-debug.apk
     - uses: actions/checkout@v4
       with:
         repository: prmiguel/todo-android-app
         ref: apks
         path: apks
     - name: Move APK
-      run: mv app/build/outputs/apk/debug/TodoMVC-debug.apk apks/
+      run: mv app/build/outputs/apk/debug/todo-debug.apk apks/
     - name: Commit and Push Changes
       run: |
         cd apks
