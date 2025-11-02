@@ -107,17 +107,29 @@ public class MainActivity extends AppCompatActivity {
         setupListeners();
     }
 
+    private void submitTodo() {
+        String todoText = etNewTodo.getText().toString();
+        if (!todoText.trim().isEmpty()) {
+            viewModel.addTodo(todoText);
+            etNewTodo.setText("");
+        }
+    }
+
     private void setupListeners() {
         etNewTodo.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                String todoText = etNewTodo.getText().toString();
-                if (!todoText.trim().isEmpty()) {
-                    viewModel.addTodo(todoText);
-                    etNewTodo.setText("");
-                }
-                return true; // Indicate we've handled the action
+                submitTodo();
+                return true;
             }
-            return false; // Let the system handle the action
+            return false;
+        });
+
+        etNewTodo.setOnKeyListener((v, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
+                submitTodo();
+                return true;
+            }
+            return false;
         });
 
         // Adapter click listeners
