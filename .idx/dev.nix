@@ -7,13 +7,13 @@
   # Use https://search.nixos.org/packages to find packages
   packages = [
     pkgs.jdk17
-    pkgs.android-sdk
+    pkgs.android-tools
+    pkgs.android-studio
   ];
 
   # Sets environment variables in the workspace
   env = {
     JAVA_HOME = "${pkgs.jdk17}";
-    ANDROID_HOME = "${pkgs.android-sdk}";
   };
   idx = {
     # Search for the extensions you want on https://open-vsx.org/ and use "publisher.id"
@@ -33,7 +33,8 @@
           manager = "android";
           # To use a different API level, see https://search.nixos.org/packages?channel=unstable&query=android-emulator-images
           # and replace the package below.
-          package = pkgs.android-emulator-images.system-images_x86-64_34;
+          
+          #package = pkgs.android-sdk.system-images.android_34.google_apis.x86_64;
         };
       };
     };
